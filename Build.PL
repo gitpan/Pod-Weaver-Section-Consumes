@@ -18,13 +18,12 @@ my %module_build_args = (
     "Mike Friedman <friedo\@friedo.com>"
   ],
   "dist_name" => "Pod-Weaver-Section-Consumes",
-  "dist_version" => "0.002",
+  "dist_version" => "0.003",
   "license" => "perl",
   "module_name" => "Pod::Weaver::Section::Consumes",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
-    "Data::Dumper" => 0,
     "Moose" => 0,
     "Pod::Elemental::Element::Nested" => 0,
     "Pod::Elemental::Element::Pod5::Command" => 0,

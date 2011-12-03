@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.002';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.003';
 }
 
 use strict;
@@ -68,9 +68,6 @@ sub _get_roles {
 
     my @roles = $module->meta->calculate_all_roles;
 
-    use Data::Dumper;
-    print Dumper \@roles;
-
     return @roles;
 }
 
@@ -88,7 +85,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
