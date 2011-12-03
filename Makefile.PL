@@ -11,16 +11,28 @@ use ExtUtils::MakeMaker 6.30;
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Add a list of roles to your POD.",
   "AUTHOR" => "Mike Friedman <friedo\@friedo.com>",
-  "BUILD_REQUIRES" => {},
+  "BUILD_REQUIRES" => {
+    "Module::Build" => "0.3601"
+  },
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30"
+    "ExtUtils::MakeMaker" => "6.30",
+    "Module::Build" => "0.3601"
   },
   "DISTNAME" => "Pod-Weaver-Section-Consumes",
   "EXE_FILES" => [],
   "LICENSE" => "perl",
   "NAME" => "Pod::Weaver::Section::Consumes",
-  "PREREQ_PM" => {},
-  "VERSION" => "0.001",
+  "PREREQ_PM" => {
+    "Data::Dumper" => 0,
+    "Moose" => 0,
+    "Pod::Elemental::Element::Nested" => 0,
+    "Pod::Elemental::Element::Pod5::Command" => 0,
+    "Pod::Weaver::Role::Section" => 0,
+    "aliased" => 0,
+    "strict" => 0,
+    "warnings" => 0
+  },
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => ""
   }
