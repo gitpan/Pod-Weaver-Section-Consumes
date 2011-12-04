@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.004';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.005';
 }
 
 use strict;
@@ -41,12 +41,16 @@ sub weave_section {
             content   => 4
         } ),
 
-        map { 
+        ( map { 
             Command->new( {
                 command    => 'item',
                 content    => sprintf 'L<%s>', $_->name
             } ),
-        } @roles
+        } @roles ),
+        Command->new( { 
+            command   => 'back',
+            content   => ''
+        } )
     );        
 
     push @{ $doc->children },
@@ -81,7 +85,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 

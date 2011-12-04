@@ -25,4 +25,4 @@ requires:
   warnings: 0
 resources:
   repository: git://github.com/friedo/pod-weaver-section-consumes.git
-version: 0.004
+version: 0.005
