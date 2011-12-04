@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.003';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.004';
 }
 
 use strict;
@@ -10,6 +10,7 @@ use warnings;
 # ABSTRACT: Add a list of roles to your POD.
 
 use Moose;
+use Module::Load;
 with 'Pod::Weaver::Role::Section';
 
 use aliased 'Pod::Elemental::Element::Nested';
@@ -21,17 +22,12 @@ sub weave_section {
     my $file = $input->{filename};
     return unless $file =~ m{^lib/};
 
-    # yeah, this is a stupid way to do it. it's only for generating
-    # docs though. shut up.
-    my $success = do $file;
-
-    die "Could not compile $file to find role data: $@ $!"
-      unless $success;
-
     my $module = $file;
     $module =~ s{^lib/}{};    # assume modules live under lib
     $module =~ s{/}{::}g;
     $module =~ s/\.pm//;
+
+    load $module;
 
     return unless $module->can( 'meta' );
 
@@ -85,7 +81,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
