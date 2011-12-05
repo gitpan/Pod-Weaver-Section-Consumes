@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.005';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.006';
 }
 
 use strict;
@@ -27,6 +27,8 @@ sub weave_section {
     $module =~ s{/}{::}g;
     $module =~ s/\.pm//;
 
+    unshift @INC, './lib';    # assume we want modules from the CWD
+
     load $module;
 
     return unless $module->can( 'meta' );
@@ -44,7 +46,7 @@ sub weave_section {
         ( map { 
             Command->new( {
                 command    => 'item',
-                content    => sprintf 'L<%s>', $_->name
+                content    => sprintf '* L<%s>', $_->name
             } ),
         } @roles ),
         Command->new( { 
@@ -60,6 +62,8 @@ sub weave_section {
             content   => 'CONSUMES',
             children  => \@pod
         } );
+
+    shift @INC;
 
 }
 
@@ -85,7 +89,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
