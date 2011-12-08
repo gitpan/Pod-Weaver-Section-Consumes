@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.006';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.007';
 }
 
 use strict;
@@ -33,8 +33,7 @@ sub weave_section {
 
     return unless $module->can( 'meta' );
 
-    my @roles = $self->_get_roles( $module );
-
+    my @roles = grep { $_->name ne $module } $self->_get_roles( $module );
     return unless @roles;
 
     my @pod = (
@@ -49,6 +48,7 @@ sub weave_section {
                 content    => sprintf '* L<%s>', $_->name
             } ),
         } @roles ),
+
         Command->new( { 
             command   => 'back',
             content   => ''
@@ -89,7 +89,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
