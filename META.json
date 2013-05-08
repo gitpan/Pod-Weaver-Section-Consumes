@@ -4,7 +4,7 @@
       "Mike Friedman <friedo@friedo.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112150",
+   "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -27,14 +27,14 @@
       },
       "runtime" : {
          "requires" : {
-            "Module::Load" : 0,
-            "Moose" : 0,
-            "Pod::Elemental::Element::Nested" : 0,
-            "Pod::Elemental::Element::Pod5::Command" : 0,
-            "Pod::Weaver::Role::Section" : 0,
-            "aliased" : 0,
-            "strict" : 0,
-            "warnings" : 0
+            "Module::Load" : "0",
+            "Moose" : "0",
+            "Pod::Elemental::Element::Nested" : "0",
+            "Pod::Elemental::Element::Pod5::Command" : "0",
+            "Pod::Weaver::Role::Section" : "0",
+            "aliased" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
@@ -43,9 +43,9 @@
       "repository" : {
          "type" : "git",
          "url" : "git://github.com/friedo/pod-weaver-section-consumes.git",
-         "web" : "http://github.com/friedo/pod-weaver-section-consumes"
+         "web" : "https://github.com/friedo/pod-weaver-section-consumes"
       }
    },
-   "version" : "0.007"
+   "version" : "0.008"
 }
 

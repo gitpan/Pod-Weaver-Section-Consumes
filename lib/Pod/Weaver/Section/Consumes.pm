@@ -1,86 +1,94 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.007';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.008';
 }
 
 use strict;
 use warnings;
-
+use Module::Load;
+use lib './lib';    #instead messing with INC
 
 # ABSTRACT: Add a list of roles to your POD.
-
 use Moose;
-use Module::Load;
 with 'Pod::Weaver::Role::Section';
 
 use aliased 'Pod::Elemental::Element::Nested';
 use aliased 'Pod::Elemental::Element::Pod5::Command';
 
-sub weave_section { 
+sub weave_section {
     my ( $self, $doc, $input ) = @_;
 
-    my $file = $input->{filename};
-    return unless $file =~ m{^lib/};
+    my $filename = $input->{filename};    #full rel path
+    return unless $filename =~ m{^lib/};
 
-    my $module = $file;
-    $module =~ s{^lib/}{};    # assume modules live under lib
+    # works only if one package pro file
+    my $inc_filename = $filename;         #as in %INC's keys
+    $inc_filename =~ s{^lib/}{};          # assume modules live under lib
+    my $module = $inc_filename;
     $module =~ s{/}{::}g;
-    $module =~ s/\.pm//;
+    $module =~ s{\.\w+$}{};
 
-    unshift @INC, './lib';    # assume we want modules from the CWD
+    eval { load $inc_filename };
+    print "$@" if $@;
+    #print map {"$_\n"} sort keys %INC;
 
-    load $module;
-
-    return unless $module->can( 'meta' );
-
-    my @roles = grep { $_->name ne $module } $self->_get_roles( $module );
+    return unless $module->can('meta');
+    my @roles = sort
+      grep { $_ ne $module }
+      map  { $_->name } $self->_get_roles($module);
     return unless @roles;
 
     my @pod = (
-        Command->new( { 
-            command   => 'over',
-            content   => 4
-        } ),
+        Command->new(
+            {
+                command => 'over',
+                content => 4
+            }
+        ),
 
-        ( map { 
-            Command->new( {
-                command    => 'item',
-                content    => sprintf '* L<%s>', $_->name
-            } ),
-        } @roles ),
+        (
+            map {
+                Command->new(
+                    {
+                        command => 'item',
+                        content => "* L<$_>",
+                    }
+                  ),
+            } @roles
+        ),
 
-        Command->new( { 
-            command   => 'back',
-            content   => ''
-        } )
-    );        
+        Command->new(
+            {
+                command => 'back',
+                content => ''
+            }
+        )
+    );
 
     push @{ $doc->children },
-        Nested->new( { 
-            type      => 'command',
-            command   => 'head1',
-            content   => 'CONSUMES',
-            children  => \@pod
-        } );
-
-    shift @INC;
+      Nested->new(
+        {
+            type     => 'command',
+            command  => 'head1',
+            content  => 'CONSUMES',
+            children => \@pod
+        }
+      );
 
 }
 
-sub _get_roles { 
+sub _get_roles {
     my ( $self, $module ) = @_;
 
-    my @roles = $module->meta->calculate_all_roles;
-
+    my @roles = eval { $module->meta->calculate_all_roles };
+    print "Possibly harmless: $@" if $@;
     return @roles;
 }
 
-
 1;
 
-
-
 __END__
+
 =pod
 
 =head1 NAME
@@ -89,7 +97,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -117,4 +125,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
