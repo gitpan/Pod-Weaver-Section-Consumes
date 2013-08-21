@@ -1,6 +1,6 @@
 package Pod::Weaver::Section::Consumes;
 {
-  $Pod::Weaver::Section::Consumes::VERSION = '0.009';
+  $Pod::Weaver::Section::Consumes::VERSION = '0.010';
 }
 
 # ABSTRACT: Add a list of roles to your POD.
@@ -105,7 +105,7 @@ Pod::Weaver::Section::Consumes - Add a list of roles to your POD.
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 SYNOPSIS
 
