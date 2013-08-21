@@ -23,6 +23,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Pod::Weaver::Section::Consumes",
   "PREREQ_PM" => {
+    "Class::Inspector" => 0,
     "Module::Load" => 0,
     "Moose" => 0,
     "Pod::Elemental::Element::Nested" => 0,
@@ -33,7 +34,7 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {},
-  "VERSION" => "0.008",
+  "VERSION" => "0.009",
   "test" => {
     "TESTS" => ""
   }

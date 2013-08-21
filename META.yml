@@ -15,6 +15,7 @@ meta-spec:
   version: 1.4
 name: Pod-Weaver-Section-Consumes
 requires:
+  Class::Inspector: 0
   Module::Load: 0
   Moose: 0
   Pod::Elemental::Element::Nested: 0
@@ -25,4 +26,4 @@ requires:
   warnings: 0
 resources:
   repository: git://github.com/friedo/pod-weaver-section-consumes.git
-version: 0.008
+version: 0.009

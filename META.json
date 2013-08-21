@@ -27,6 +27,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Class::Inspector" : "0",
             "Module::Load" : "0",
             "Moose" : "0",
             "Pod::Elemental::Element::Nested" : "0",
@@ -46,6 +47,6 @@
          "web" : "https://github.com/friedo/pod-weaver-section-consumes"
       }
    },
-   "version" : "0.008"
+   "version" : "0.009"
 }
 

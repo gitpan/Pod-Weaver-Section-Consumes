@@ -7,3 +7,4 @@ Makefile.PL
 README
 dist.ini
 lib/Pod/Weaver/Section/Consumes.pm
+ts.pl
